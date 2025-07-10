@@ -1,52 +1,53 @@
-# 📸 Photo Plus - 이미지 통합 툴 (Tkinter 연습 프로젝트)
+# 🤖 Python 자동화 실습 (with pyautogui)
 
-`Photo Plus`는 Python의 `tkinter`와 `Pillow` 라이브러리를 사용하여 제작한  
-**공부용 이미지 병합 프로그램**입니다.  
-여러 장의 이미지를 하나로 합치는 기능을 구현하면서 `GUI`, `파일 다이얼로그`, `ProgressBar`, `이미지 처리` 등을 연습했습니다.
-
----
-
-## 🧠 코드 구성 설명
-
-### 📁 주요 기능
-
-- **파일 선택 및 리스트 관리**
-  - `add_file()`: 다중 이미지 파일을 리스트에 추가
-  - `del_file()`: 선택된 파일 삭제
-
-- **저장 경로 지정**
-  - `browse_dest_path()`: 병합 이미지 저장 폴더 선택
-
-- **이미지 병합 처리**
-  - `merge_image()`:
-    - 이미지 크기 조정 (가로 폭 설정 가능)
-    - 이미지 간격 추가 (없음, 좁게, 보통, 넓게)
-    - 포맷 선택 (PNG, JPG, BMP)
-    - 진행률 표시 (ProgressBar)
-    - 예외 발생 시 알림창으로 오류 처리
-
-- **버튼 및 메뉴 구성**
-  - `tkinter`를 사용해 리스트, 옵션, 저장경로, 실행 버튼 등을 GUI 형태로 구성
+이 프로젝트는 Python의 `pyautogui`, `pyperclip`, `shutil`, `os`, `logging` 등 다양한 라이브러리를 활용해  
+**마우스/키보드 자동화, 이미지 인식, 윈도우 조작, 파일 시스템 관리** 등을 연습한 실습 코드 모음입니다.  
 
 ---
 
-## 🛠 사용한 라이브러리
+## 📌 주요 실습 내용
 
-- `tkinter`: 기본 GUI 구성
-- `tkinter.ttk`: Combobox, Progressbar 등 고급 위젯
-- `tkinter.messagebox`, `filedialog`: 사용자 알림 및 파일/폴더 선택
-- `Pillow (PIL)`: 이미지 불러오기, 크기 조정, 병합, 저장 처리
+### 🖱️ 1. 마우스 & 키보드 제어
+- `moveTo`, `move`, `click`, `doubleClick`, `drag`, `scroll` 등 다양한 마우스 제어
+- `write`, `press`, `hotkey`, `keyDown/Up` 등 키보드 자동 입력
+
+### 🎯 2. 이미지 인식 자동화
+- `locateOnScreen`, `locateAllOnScreen`으로 이미지 탐지
+- `confidence`, `region`, `grayscale` 옵션으로 정확도 및 속도 조정
+- 일정 시간까지 대기하면서 이미지 탐색 (`Timeout`, `while` 루프)
+
+### 🖼️ 3. 화면 캡쳐 & 픽셀 분석
+- `screenshot()`을 통한 스크린샷 저장
+- `pixel`, `pixelMatchesColor`로 특정 좌표의 색상 판별
+
+### 🧩 4. 윈도우 창 조작
+- `getWindowsWithTitle`로 창 핸들링
+- 창 활성화, 최대화, 원복, 닫기 등 자동화 대상 창 제어
+
+### 📝 5. 입력 자동화 응용 (그림판 예제)
+- Win + R → 그림판 실행 → 버튼 인식 후 클릭 → 텍스트 자동 입력 → 종료
+- 이미지 기반 버튼 탐색 (`btn_text.png`, `btn_brush.png` 등 필요)
+
+### 📂 6. 파일 & 폴더 자동화
+- `os`, `shutil` 활용: 폴더 생성, 삭제, 파일 복사, 이동, 경로 탐색
+- `fnmatch`, `os.walk()`을 활용한 파일 검색 자동화
+
+### 🧠 7. 로그 기록
+- `logging`을 사용해 터미널과 파일 모두에 로그 남기기
+- 로그 포맷: `[시간] [로그레벨] 메시지`
 
 ---
 
-## ✨ 학습 포인트
-
-- tkinter로 **파일 선택 → 옵션 선택 → 이미지 처리 → 저장** 흐름을 처음부터 끝까지 구성해보기
-- `Pillow`를 활용한 실제 이미지 다루기
-- `ProgressBar`와 같은 사용자 경험 요소 구현
-- 파일 입출력 및 예외 처리 연습
+## 🔒 8. 팝업 및 보안 입력
+- `alert`, `confirm`, `prompt`, `password` 함수로 GUI 팝업 다루기
+- 암호 입력도 가능
 
 ---
 
-> 이 프로젝트는 학습 목적의 개인 연습용으로 작성된 코드입니다.  
-> GUI와 이미지 처리를 동시에 연습하고 싶은 분들에게 참고가 될 수 있습니다.
+## 🖼️ 예시: 그림판 자동화 실행 흐름
+
+```plaintext
+1. Win + R → mspaint 입력 → 실행
+2. '텍스트 도구' 버튼 인식 및 클릭
+3. 텍스트 영역 클릭 후 "참 잘했어요" 자동 입력
+4. 5초 대기 후 프로그램 종료 (저장 안 함)
